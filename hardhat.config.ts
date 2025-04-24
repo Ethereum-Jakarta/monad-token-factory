@@ -9,6 +9,10 @@ const config: HardhatUserConfig = {
   solidity: {
     version: "0.8.28",
     settings: {
+      metadata: {
+      bytecodeHash: "none",      // ⬅ prevents IPFS-hash mismatch
+      useLiteralContent: true,   // ⬅ embeds the full source in metadata
+    },
       optimizer: {
         enabled: true,
         runs: 200
@@ -17,6 +21,8 @@ const config: HardhatUserConfig = {
   },
   sourcify: {
     enabled: true,
+    apiUrl: "https://sourcify-api-monad.blockvision.org",
+    browserUrl: "https://testnet.monadexplorer.com",
   },
   networks: {
     // Konfigurasi untuk localhost development
@@ -32,19 +38,7 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: {
-      monadTestnet: "any",
-    },
-    customChains: [
-      {
-        network: "monadTestnet",
-        chainId: 10143,
-        urls: {
-          apiURL: "https://testnet-rpc.monad.xyz/",
-          browserURL: "https://testnet.monadexplorer.com/",
-        },
-      },
-    ],
+    enabled: false,
   },
   gasReporter: {
     enabled: true,
